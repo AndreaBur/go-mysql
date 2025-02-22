@@ -18,11 +18,11 @@ func Connect() (*sql.DB, error) {
 	}
 	//dns pero con variables de entorno
 	dns := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v",
-		os.Getenv("DB_NAME"),
 		os.Getenv("DB_USER"),
 		os.Getenv("DB_PASSWORD"),
 		os.Getenv("DB_HOST"),
-		os.Getenv("DB_PORT"))
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_NAME"))
 
 	//abrimos una conexion con la base de datos
 	//Open devuelve la conexion de la base pero tambien un error
