@@ -82,10 +82,22 @@ func GetContactByID(db *sql.DB, contactID int) {
 		}
 	}
 
-	fmt.Println("\n LISTA DE CONTACTOS :")
+	fmt.Println("\n LISTA DE UN CONTACTO :")
 	fmt.Println("\n -------------------------------------------------------------------")
 	fmt.Printf("ID: %d, NOMBRE: %s, E-MAIL: %s, TEL: %s \n", contact.Id, contact.Name,
 		contact.Email, contact.Phone)
 	fmt.Println("\n ---------------------------------------------------------------")
+
+}
+
+// creamos createContact que registra un nuevo contacto en la base de datos
+func CreateContact(db *sql.DB, contact models.Contact) {
+	query := "INSERT INTO contact (name, email, phone) VALUES (?,?,?)"
+	//ejecutamos la sentencia sql con execute que : (recibe query y valores que va a insertar)(devuelve resultado y un error)
+	_, err := db.Exec(query, contact.Name, contact.Email, contact.Phone)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Contacto registrado con éxito")
 
 }
